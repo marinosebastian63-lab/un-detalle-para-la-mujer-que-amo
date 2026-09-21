@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #start-screen {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .neon-text {
+            font-size: 5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .neon-text span {
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #0fa, 0 0 40px #0fa, 0 0 80px #0fa;
+            animation: parpadeo 2s infinite alternate;
+        }
+
+        .neon-text span:nth-child(1) { animation-delay: 0.1s; }
+        .neon-text span:nth-child(2) { animation-delay: 0.4s; }
+        .neon-text span:nth-child(3) { animation-delay: 0.2s; }
+        .neon-text span:nth-child(4) { animation-delay: 0.5s; }
+        .neon-text span:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes parpadeo {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #0fa, 0 0 40px #0fa, 0 0 80px #0fa;
+            }
+            20%, 24%, 55% {
+                opacity: 0.4;
+                text-shadow: none;
+            }
+        }
+
+        button {
+            background-color: #0044ff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #0044ff;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #main-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            text-align: center;
+        }
+
+        .mensaje-top {
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            font-size: 1.8rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffaa00;
+            z-index: 5;
+            line-height: 1.5;
+        }
+
+        .mensaje-bottom {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffaa00;
+            z-index: 5;
+            line-height: 1.5;
+        }
+
+        #svg-container {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            z-index: 1;
+        }
+
+        .flor {
+            animation: flotar 3s ease-in-out infinite alternate;
+            transform-origin: 400px 600px; 
+        }
+
+        @keyframes flotar {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+            z-index: 0;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="miMusica" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="start-screen">
+        <div class="neon-text">
+            <span>H</span><span>o</span><span>l</span><span>a</span><span>!</span>
+        </div>
+        <p>ESTE DETALLE ES PARA TI :)</p>
+        <button onclick="iniciarSorpresa()">CLICK AQUÍ</button>
+    </div>
+
+    <div id="main-content">
+        <div class="mensaje-top">
+            Te mereces todo lo mejor del mundo, espero<br>que este pequeño detalle le saque una sonrisa,
+        </div>
+        
+        <div id="svg-container">
+            <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMax meet">
+                
+                <!-- Hojas de fondo estáticas -->
+                <path d="M 400 600 Q 320 450 350 350 Q 370 450 400 600" fill="#228b22" />
+                <path d="M 400 600 Q 480 450 450 350 Q 430 450 400 600" fill="#228b22" />
+                <path d="M 330 480 Q 250 400 280 350 Q 300 420 330 480" fill="#228b22" />
+                <path d="M 470 480 Q 550 400 520 350 Q 500 420 470 480" fill="#228b22" />
+
+                <!-- Flor Izquierda con coordenadas absolutas -->
+                <g class="flor" style="animation-delay: 0.5s;">
+                    <path d="M 400 600 Q 300 450 250 300" stroke="#2e8b57" stroke-width="10" fill="none" />
+                    <circle cx="250" cy="280" r="25" fill="#ffd700"/>
+                    <circle cx="230" cy="305" r="25" fill="#ffd700"/>
+                    <circle cx="270" cy="305" r="25" fill="#ffd700"/>
+                    <circle cx="250" cy="300" r="20" fill="#ffaa00"/>
+                    <path d="M 242 305 Q 250 312 258 305" stroke="#cc7700" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Flor Derecha con coordenadas absolutas -->
+                <g class="flor" style="animation-delay: 1s;">
+                    <path d="M 400 600 Q 500 450 550 300" stroke="#2e8b57" stroke-width="10" fill="none" />
+                    <circle cx="550" cy="280" r="25" fill="#ffd700"/>
+                    <circle cx="530" cy="305" r="25" fill="#ffd700"/>
+                    <circle cx="570" cy="305" r="25" fill="#ffd700"/>
+                    <circle cx="550" cy="300" r="20" fill="#ffaa00"/>
+                    <path d="M 542 305 Q 550 312 558 305" stroke="#cc7700" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- Flor Central con coordenadas absolutas -->
+                <g class="flor">
+                    <path d="M 400 600 Q 400 400 400 250" stroke="#2e8b57" stroke-width="12" fill="none" />
+                    <circle cx="400" cy="225" r="30" fill="#ffd700"/>
+                    <circle cx="375" cy="260" r="30" fill="#ffd700"/>
+                    <circle cx="425" cy="260" r="30" fill="#ffd700"/>
+                    <circle cx="400" cy="250" r="25" fill="#ffaa00"/>
+                    <path d="M 390 255 Q 400 265 410 255" stroke="#cc7700" stroke-width="3" fill="none" stroke-linecap="round"/>
+                </g>
+
+            </svg>
+        </div>
+
+        <div class="mensaje-bottom">
+            le extraño y le amo mucho, me pase haciendo esto<br>todo el dia ojala si le guste ❤️
+        </div>
+    </div>
+
+    <script>
+        for (let i = 0; i < 60; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(star);
+        }
+
+        function iniciarSorpresa() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            
+            let audio = document.getElementById('miMusica');
+            audio.play().catch(error => {
+                console.log("El navegador bloqueó el autoplay.");
+            });
+        }
+    </script>
+</body>
+</html>
